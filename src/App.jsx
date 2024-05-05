@@ -7,6 +7,7 @@ import QuestionTwo from "./Components/QuestionTwo";
 import QuestionThree from "./Components/QuestionThree";
 import QuestionFour from "./Components/QuestionFour";
 import QuestionFive from "./Components/QuestionFive";
+import NavBar from "./Components/NavBar";
 
 const API = import.meta.env.VITE_API_URL;
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
   return (
     <>
       <h1>Squirrel Census Visualization Starter</h1>
+      <NavBar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/question1" element={<QuestionOne />} />
