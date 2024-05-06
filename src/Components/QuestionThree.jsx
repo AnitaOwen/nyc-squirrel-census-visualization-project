@@ -1,6 +1,15 @@
+import { useState } from "react";
 const QuestionThree = () => {
+  const [sound, setSound] = useState("");
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   function handleSubmit(event) {
     event.preventDefault();
+    setFormSubmitted(true);
+  }
+
+  function handleChange(event) {
+    setSound(event.target.value);
   }
   return (
     <div>
@@ -18,7 +27,7 @@ const QuestionThree = () => {
                   id="quiet"
                   name="sound"
                   value="quiet"
-                  // onChange={handleChange}
+                  onChange={handleChange}
                   required
                 />
                 Quiet
@@ -32,7 +41,7 @@ const QuestionThree = () => {
                   id="kukking"
                   name="sound"
                   value="kukking"
-                  // onChange={handleChange}
+                  onChange={handleChange}
                 />
                 Chirpy/Kukking
               </label>
@@ -45,7 +54,7 @@ const QuestionThree = () => {
                   id="quaaing"
                   name="sound"
                   value="quaaing"
-                  // onChange={handleChange}
+                  onChange={handleChange}
                 />
                 Quacking/Quaaing
               </label>
@@ -55,6 +64,7 @@ const QuestionThree = () => {
             </div>
           </div>
         </form>
+        {formSubmitted && <button>Next Question</button>}
       </div>
     </div>
   );
