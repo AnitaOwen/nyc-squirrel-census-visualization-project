@@ -3,9 +3,8 @@ import React, { useState, useEffect  } from 'react';
 import { Link } from "react-router-dom";
 const API = import.meta.env.VITE_API_URL;
 
-const QuestionFive = ({answer,  setAnswer }) => {
-  const [social, setSocial] = useState("")
-  const [toggleForm, setToggleForm] = useState("");
+const QuestionFive = ({ answer,  setAnswer }) => {
+  const [toggleForm, setToggleForm] = useState(true);
   const [data, setData] = useState([])
 
   const handleChange = (event) => {
@@ -15,7 +14,7 @@ const QuestionFive = ({answer,  setAnswer }) => {
   function handleSubmit(event){
     event.preventDefault()
     setToggleForm(false);
-    fetch(`${API}?location=${answer.social}`)
+    fetch(`${API}?${answer.social}=true`)
     .then((res) => res.json())
     .then((data) => setData(data))
     .catch((error) => console.error(error))
@@ -32,32 +31,32 @@ const QuestionFive = ({answer,  setAnswer }) => {
           <p>Squirrels are like people. Some can be shy or some can be very friendly. When you saw the squirrel, what was it doing?</p>
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="hiding">
+              <label htmlFor="social">
                 <input 
                   type="radio"
-                  id="hiding"
-                  name="hiding"
+                  id="runs_from"
+                  name="social"
                   value="runs_from"
                   onChange={handleChange}
                   required
                 />
                 hiding from humans 
               </label>
-              <label htmlFor="exploring">
+              <label htmlFor="social">
                 <input
                   type="radio" 
-                  id="just exploring"
-                  name="just exploring"
+                  id="foraging"
+                  name="social"
                   value="foraging"
                   onChange={handleChange}
                 />
                 exploring and looking for food
               </label>
-              <label htmlFor="greeting">
+              <label htmlFor="social">
                 <input 
                   type="radio"
-                  id="greeting"
-                  name="greeting"
+                  id="approaches"
+                  name="social"
                   value="approaches"
                   onChange={handleChange}
                   required
@@ -72,7 +71,7 @@ const QuestionFive = ({answer,  setAnswer }) => {
       {!toggleForm && (
         <div>
           <p>Some calculations</p>
-          <Link to={`/question3`}>Next Question</Link>
+          <Link to={`/bonus`}>Next Question</Link>
         </div>
       )}
     </div>
