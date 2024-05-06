@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 const API = import.meta.env.VITE_API_URL;
 
 const QuestionThree = ({ answer, setAnswer }) => {
-  // const [sound, setSound] = useState("");
   const [toggleForm, setToggleForm] = useState(true);
   const [data, setData] = useState([]);
 
@@ -20,9 +19,9 @@ const QuestionThree = ({ answer, setAnswer }) => {
     setAnswer({ ...answer, [event.target.name]: event.target.value });
   }
 
-  useEffect(() => {
-    console.log(data); // This will log whenever data changes
-  }, [data]);
+  // useEffect(() => {
+  //   console.log(data); // This will log whenever data changes
+  // }, [data]);
 
   return (
     <div>
@@ -45,17 +44,18 @@ const QuestionThree = ({ answer, setAnswer }) => {
                 />
                 Quiet
               </label>
-
-              <label htmlFor="kuks">
-                <input
-                  type="radio"
-                  id="kuks"
-                  name="sound"
-                  value="kuks"
-                  onChange={handleChange}
-                />
-                Chirpy/Kukking
-              </label>
+              <div>
+                <label htmlFor="kuks">
+                  <input
+                    type="radio"
+                    id="kuks"
+                    name="sound"
+                    value="kuks"
+                    onChange={handleChange}
+                  />
+                  Chirpy/Kukking
+                </label>
+              </div>
 
               <div>
                 <label htmlFor="quaas">
