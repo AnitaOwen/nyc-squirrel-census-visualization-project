@@ -22,7 +22,7 @@ const QuestionTwo = ({answer,  setAnswer, sightingsCount }) => {
   console.log(sightingsCount.length)
   // average # number of times the same color was seen in this park in a year
   function findPercentage(){
-    return (data.length / sightingsCount.length) * 100
+    return Math.ceil((data.length / 3023) * 100)
   }
   const percentage = findPercentage()
 
