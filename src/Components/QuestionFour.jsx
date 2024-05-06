@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const QuestionFour = () => {
+const QuestionFour = ({answer,  setAnswer }) => {
   const [activity, setActivity] = useState("")
   const [formSubmitted, setFormSubmitted] = useState(false);
 

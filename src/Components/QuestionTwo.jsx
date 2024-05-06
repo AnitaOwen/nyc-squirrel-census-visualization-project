@@ -19,9 +19,9 @@ const QuestionTwo = ({answer,  setAnswer }) => {
     .catch((error) => console.error(error))
   }
 
-  useEffect(() => {
-    console.log(data); // This will log whenever data changes
-  }, [data])
+  // useEffect(() => {
+  //   console.log(data); // This will log whenever data changes
+  // }, [data])
 
   return (
     <div>
@@ -59,7 +59,9 @@ const QuestionTwo = ({answer,  setAnswer }) => {
       {!toggleForm && (
         <div>
           <p>Some calculations</p>
-          <Link to={`/question3`}>Next Question</Link>
+          <Link to={`/question3`}>
+            <button>Next Question</button>
+          </Link>
         </div>
       )}
     </div>
