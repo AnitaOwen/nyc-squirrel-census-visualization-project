@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
-const QuestionTwo = () => {
+import React, { useState, useEffect  } from 'react';
+import { Link } from "react-router-dom";
+const API = import.meta.env.VITE_API_URL;
+
+const QuestionTwo = ({answer,  setAnswer }) => {
   const [toggleForm, setToggleForm] = useState(true);
+  const [data, setData] = useState([])
+
+  const handleChange = (event) => {
+    setAnswer({ ...answer, [event.target.name]: event.target.value });
+  }
 
   function handleSubmit(event){
     event.preventDefault()
     setToggleForm(false);
+    fetch(`${API}?location=${answer.location}`)
+    .then((res) => res.json())
+    .then((data) => setData(data))
+    .catch((error) => console.error(error))
   }
 
+  useEffect(() => {
+    console.log(data); // This will log whenever data changes
+  }, [data])
 
   return (
     <div>
@@ -15,24 +30,24 @@ const QuestionTwo = () => {
           <p>When you first spotted the squirrel, where was it?</p>
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="ground">
+              <label htmlFor="Ground Plane">
                 <input 
                   type="radio"
-                  id="ground"
+                  id="Ground Plane"
                   name="location"
-                  value="ground"
-                  // onChange={handleChange}
+                  value="Ground Plane"
+                  onChange={handleChange}
                   required
                 />
                 on the ground
               </label>
-              <label htmlFor="tree">
+              <label htmlFor="Above Ground">
                 <input
                   type="radio" 
-                  id="tree"
+                  id="Above Ground"
                   name="location"
-                  value="tree"
-                  // onChange={handleChange}
+                  value="Above Ground"
+                  onChange={handleChange}
                 />
                 in a tree
               </label>
@@ -43,7 +58,8 @@ const QuestionTwo = () => {
       )}
       {!toggleForm && (
         <div>
-          <p>Some calculation</p>
+          <p>Some calculations</p>
+          <Link to={`/question3`}>Next Question</Link>
         </div>
       )}
     </div>
