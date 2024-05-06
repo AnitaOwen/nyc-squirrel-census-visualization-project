@@ -13,7 +13,7 @@ const QuestionFive = ({answer,  setAnswer }) => {
   function handleSubmit(event){
     event.preventDefault()
     setToggleForm(false);
-    fetch(`${API}?location=${answer.location}`)
+    fetch(`${API}?location=${answer.social}`)
     .then((res) => res.json())
     .then((data) => setData(data))
     .catch((error) => console.error(error))
@@ -35,7 +35,7 @@ const QuestionFive = ({answer,  setAnswer }) => {
                   type="radio"
                   id="hiding"
                   name="hiding"
-                  value="hiding"
+                  value="runs_from"
                   onChange={handleChange}
                   required
                 />
@@ -46,17 +46,17 @@ const QuestionFive = ({answer,  setAnswer }) => {
                   type="radio" 
                   id="just exploring"
                   name="just exploring"
-                  value="just exploring"
+                  value="foraging"
                   onChange={handleChange}
                 />
-                just exploring
+                exploring and looking for food
               </label>
               <label htmlFor="greeting">
                 <input 
                   type="radio"
                   id="greeting"
                   name="greeting"
-                  value="greeting"
+                  value="approaches"
                   onChange={handleChange}
                   required
                 />
