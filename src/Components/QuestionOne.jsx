@@ -5,7 +5,8 @@ const QuestionOne = () => {
     event.preventDefault()
   }
 
-  return <div>
+  return (
+  <div>
     <div>
       <p>Each of my friends have different color fur. What color is the squirrel you just saw?
       </p>
@@ -13,7 +14,7 @@ const QuestionOne = () => {
         <div>
           <label htmlFor="black">
             <input 
-            type="radio" 
+            type="radio"
             id="black"
             name="color"
             value="black"
@@ -23,7 +24,7 @@ const QuestionOne = () => {
             Black
           </label>
           <label htmlFor="cinnamon">
-            <input 
+            <input
             type="radio" 
             id="cinnamon"
             name="color"
@@ -47,6 +48,7 @@ const QuestionOne = () => {
       </form>
     </div>
   </div>
+  )
 };
 
 export default QuestionOne;
