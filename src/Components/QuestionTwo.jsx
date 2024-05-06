@@ -9,7 +9,7 @@ const QuestionTwo = ({answer,  setAnswer, sightingsCount }) => {
   const handleChange = (event) => {
     setAnswer({ ...answer, [event.target.name]: event.target.value });
   }
-
+  
   function handleSubmit(event){
     event.preventDefault()
     setToggleForm(false);
@@ -18,17 +18,17 @@ const QuestionTwo = ({answer,  setAnswer, sightingsCount }) => {
     .then((data) => setData(data))
     .catch((error) => console.error(error))
   }
-
-  console.log(sightingsCount.length)
-  // average # number of times the same color was seen in this park in a year
+  
+  // console.log(sightingsCount.length)
+  // average # number of times the same color was seen in this park
   function findPercentage(){
     return Math.ceil((data.length / 3023) * 100)
   }
   const percentage = findPercentage()
 
-  // useEffect(() => {
-  //   console.log(data); // This will log whenever data changes
-  // }, [data])
+  useEffect(() => {
+    console.log(data); // This will log whenever data changes
+  }, [data])
 
   return (
     <div>
@@ -37,7 +37,7 @@ const QuestionTwo = ({answer,  setAnswer, sightingsCount }) => {
           <p>When you first spotted the squirrel, where was it?</p>
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="Ground Plane">
+              <label htmlFor="location">
                 <input 
                   type="radio"
                   id="Ground Plane"
@@ -48,7 +48,7 @@ const QuestionTwo = ({answer,  setAnswer, sightingsCount }) => {
                 />
                 on the ground
               </label>
-              <label htmlFor="Above Ground">
+              <label htmlFor="location">
                 <input
                   type="radio" 
                   id="Above Ground"

@@ -19,6 +19,7 @@ const App = () => {
     activity: "",
     feeling: "",
   })
+  
 
   useEffect(() => {
     fetch(`${API}`)
