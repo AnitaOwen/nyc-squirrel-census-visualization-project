@@ -1,4 +1,4 @@
-const QuestionFive = () => {
+const QuestionFive = ({answer,  setAnswer }) => {
   return <div>QuestionFive</div>;
 };
 
