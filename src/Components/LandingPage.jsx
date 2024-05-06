@@ -1,3 +1,5 @@
+import QuestionOne from "./QuestionOne";
+
 const LandingPage = () => {
   return (
   <div>
