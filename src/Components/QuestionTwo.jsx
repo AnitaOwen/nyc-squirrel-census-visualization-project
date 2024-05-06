@@ -2,7 +2,7 @@ import React, { useState, useEffect  } from 'react';
 import { Link } from "react-router-dom";
 const API = import.meta.env.VITE_API_URL;
 
-const QuestionTwo = ({answer,  setAnswer }) => {
+const QuestionTwo = ({answer,  setAnswer, sightingsCount }) => {
   const [toggleForm, setToggleForm] = useState(true);
   const [data, setData] = useState([])
 
@@ -19,9 +19,16 @@ const QuestionTwo = ({answer,  setAnswer }) => {
     .catch((error) => console.error(error))
   }
 
-  useEffect(() => {
-    console.log(data); // This will log whenever data changes
-  }, [data])
+  console.log(sightingsCount.length)
+  // average # number of times the same color was seen in this park in a year
+  function findPercentage(){
+    return (data.length / sightingsCount.length) * 100
+  }
+  const percentage = findPercentage()
+
+  // useEffect(() => {
+  //   console.log(data); // This will log whenever data changes
+  // }, [data])
 
   return (
     <div>
@@ -58,8 +65,10 @@ const QuestionTwo = ({answer,  setAnswer }) => {
       )}
       {!toggleForm && (
         <div>
-          <p>Some calculations</p>
-          <Link to={`/question3`}>Next Question</Link>
+          <p>{percentage}% of people who reported seeing a squirrel also saw them in this place!</p>
+          <Link to={`/question3`}>
+            <button>Next Question</button>
+          </Link>
         </div>
       )}
     </div>

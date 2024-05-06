@@ -1,20 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
+import { Link } from "react-router-dom";
+const API = import.meta.env.VITE_API_URL;
 
-const QuestionFour = () => {
+const QuestionFour = ({answer,  setAnswer }) => {
   const [activity, setActivity] = useState("")
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [toggleForm, setToggleForm] = useState(true);
+  const [data, setData] = useState([])
+
+  // const activityEndpoints = {
+  //   running: `${API}?running=true`,
+  //   chasing: `${API}?chasing=true`,
+  //   foraging: `${API}?foraging=true`,
+  //   eating: `${API}?eating=true`,
+  //   indifferent: `${API}?indifferent=true`,
+  // };
+
+  // const apiUrl = activityEndpoints[activity]
 
   function handleSubmit(event){
     event.preventDefault()
-    setFormSubmitted(true)
+    setToggleForm(false)
+    fetch(`${API}?${activity}=true`)
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((error) => console.error(error))
   }
 
   function handleChange(event) {
     setActivity(event.target.value)
+    setAnswer({ ...answer, [event.target.name]: event.target.value })
   }
+
+  useEffect(() => {
+    console.log(data); // This will log whenever data changes
+  }, [data])
 
   return (
     <div>
+      {toggleForm && (
       <div>
         <p>Some of my friends like to look for things to eat or hide or will make friends around the park. When you saw my friend, what were they doing?</p>
         <form onSubmit={handleSubmit}>
@@ -73,8 +96,16 @@ const QuestionFour = () => {
             <button type="submit">Submit</button>
           </div>
         </form>
-        {formSubmitted && <button>Next Question</button>}
-      </div>
+        </div>
+      )}
+        {!toggleForm && (
+        <div>
+          <p>Some calculations</p>
+          <Link to={`/question5`}>
+            <button>Next Question</button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

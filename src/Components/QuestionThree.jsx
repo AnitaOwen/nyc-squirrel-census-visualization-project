@@ -1,5 +1,5 @@
 import { useState } from "react";
-const QuestionThree = () => {
+const QuestionThree = ({answer,  setAnswer }) => {
   const [sound, setSound] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
 

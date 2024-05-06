@@ -11,7 +11,7 @@ import NavBar from "./Components/NavBar";
 
 const API = import.meta.env.VITE_API_URL;
 const App = () => {
-  // const [, ] = useState([]);
+  const [sightingsCount, setSightingsCount] = useState([]);
   const [answer, setAnswer] = useState({
     color: "",
     location: "",
@@ -19,13 +19,12 @@ const App = () => {
     activity: "",
     feeling: "",
   })
-  const [adults, setAdults] = useState([]);
 
-  // useEffect(() => {
-  //   fetch(`${API}?age=Adult`)
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data));
-  // }, []);
+  useEffect(() => {
+    fetch(`${API}`)
+      .then((res) => res.json())
+      .then((data) => setSightingsCount(data));
+  }, []);
 
   return (
     <>
@@ -33,11 +32,11 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/question1" element={<QuestionOne />} />
-        <Route path="/question2" element={<QuestionTwo answer={answer} setAnswer={setAnswer} />} />
-        <Route path="/question3" element={<QuestionThree />} />
-        <Route path="/question4" element={<QuestionFour />} />
-        <Route path="/question5" element={<QuestionFive />} />
+        <Route path="/question1" element={<QuestionOne answer={answer} setAnswer={setAnswer}/>} />
+        <Route path="/question2" element={<QuestionTwo answer={answer} setAnswer={setAnswer} sightingsCount={sightingsCount}/>} />
+        <Route path="/question3" element={<QuestionThree answer={answer} setAnswer={setAnswer}/>} />
+        <Route path="/question4" element={<QuestionFour answer={answer} setAnswer={setAnswer}/>} />
+        <Route path="/question5" element={<QuestionFive answer={answer} setAnswer={setAnswer}/>} />
       </Routes>
     </>
   );
