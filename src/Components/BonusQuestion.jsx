@@ -4,12 +4,22 @@ const BonusQuestion = () => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
+    setAnswer({ ...answer, [event.target.name]: event.target.value });
+  }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
+  function handleSubmit(event){
+    event.preventDefault()
+    setToggleForm(false);
+    fetch(`${API}?location=${answer.social}`)
+    .then((res) => res.json())
+    .then((data) => setData(data))
+    .catch((error) => console.error(error))
+  }
+
+  useEffect(() => {
+    console.log(data); // This will log whenever data changes
+  }, [data])
+
 
   const closeModal = () => {
     setSelectedOption(null);

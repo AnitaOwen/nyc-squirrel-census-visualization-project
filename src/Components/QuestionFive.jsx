@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 const API = import.meta.env.VITE_API_URL;
 
 const QuestionFive = ({answer,  setAnswer }) => {
-  const [toggleForm, setToggleForm] = useState(true);
+  const [social, setSocial] = useState("")
+  const [toggleForm, setToggleForm] = useState("");
   const [data, setData] = useState([])
 
   const handleChange = (event) => {
