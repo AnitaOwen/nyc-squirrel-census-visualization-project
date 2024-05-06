@@ -19,6 +19,11 @@ const QuestionThree = ({ answer, setAnswer }) => {
     setAnswer({ ...answer, [event.target.name]: event.target.value });
   }
 
+  function findPercentage() {
+    return Math.ceil((data.length / 3023) * 100);
+  }
+  const percentage = findPercentage();
+
   // useEffect(() => {
   //   console.log(data); // This will log whenever data changes
   // }, [data]);
@@ -77,7 +82,10 @@ const QuestionThree = ({ answer, setAnswer }) => {
       )}
       {!toggleForm && (
         <div>
-          <p>CALCULATIONS</p>
+          <p>
+            {percentage}% of people who reported seeing a squirrel also heard a
+            squirrel making the same noises!
+          </p>
           <Link to={`/question4`}>
             <button>Next Question</button>
           </Link>
