@@ -11,38 +11,48 @@ const QuestionThree = () => {
         </p>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="quiet">
-              <input
-                type="radio"
-                id="quiet"
-                name="sound"
-                value="quiet"
-                // onChange={handleChange}
-                required
-              />
-              Quiet
-            </label>
-            <label htmlFor="kukking">
-              <input
-                type="radio"
-                id="kukking"
-                name="sound"
-                value="kukking"
-                // onChange={handleChange}
-              />
-              Chirpy/Kukking
-            </label>
-            <label htmlFor="quaaing">
-              <input
-                type="radio"
-                id="quaaing"
-                name="sound"
-                value="quaaing"
-                // onChange={handleChange}
-              />
-              Quacking/Quaaing
-            </label>
-            <button type="submit">Next Question</button>
+            <div>
+              <label htmlFor="quiet">
+                <input
+                  type="radio"
+                  id="quiet"
+                  name="sound"
+                  value="quiet"
+                  // onChange={handleChange}
+                  required
+                />
+                Quiet
+              </label>
+            </div>
+
+            <div>
+              <label htmlFor="kukking">
+                <input
+                  type="radio"
+                  id="kukking"
+                  name="sound"
+                  value="kukking"
+                  // onChange={handleChange}
+                />
+                Chirpy/Kukking
+              </label>
+            </div>
+
+            <div>
+              <label htmlFor="quaaing">
+                <input
+                  type="radio"
+                  id="quaaing"
+                  name="sound"
+                  value="quaaing"
+                  // onChange={handleChange}
+                />
+                Quacking/Quaaing
+              </label>
+            </div>
+            <div>
+              <button type="submit">Submit</button>
+            </div>
           </div>
         </form>
       </div>
