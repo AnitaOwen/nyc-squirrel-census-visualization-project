@@ -151,7 +151,7 @@ const QuestionFive = ({ answer,  setAnswer, sightings }) => {
           <p>
             {approachesPercentage}% of squirrels in Central Park were brave enough to say hi to other people.
           </p>
-          <Link to={`/bonus`}><button className="bg-red-400 ">Next Question</button></Link>
+          <Link to={'/squirrel'}><button>Let's see who you found!</button></Link>
         </div>
       )}
     </div>

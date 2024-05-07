@@ -98,6 +98,10 @@ const App = () => {
             />
           }
         />
+        <Route
+          path="/squirrel"
+          element={<Squirrel answer={answer} squirrels={squirrels} />}
+        />
       </Routes>
     </>
   );
