@@ -1,6 +1,8 @@
 import React from 'react'
 
-const Squirrel = () => {
+const Squirrel = ({ squirrels, answer }) => {
+    console.log("ANSWER", answer)
+    console.log("SQUIRRELS", squirrels)
   return (
     <div>Squirrel</div>
   )

@@ -8,6 +8,8 @@ import QuestionThree from "./Components/QuestionThree";
 import QuestionFour from "./Components/QuestionFour";
 import QuestionFive from "./Components/QuestionFive";
 import NavBar from "./Components/NavBar";
+import Squirrel from "./Components/Squirrel";
+import { squirrels } from "../squirrelData";
 
 const API = import.meta.env.VITE_API_URL;
 
