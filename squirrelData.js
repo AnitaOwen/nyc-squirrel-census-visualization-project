@@ -1,4 +1,4 @@
-const squirrels = [
+export const squirrels = [
     {
         resultColor: "black",
         color: 'Variable, but commonly reddish-brown or black with a white belly.',
@@ -26,5 +26,3 @@ const squirrels = [
         description: "The Eastern Gray Squirrel is perhaps the most common squirrel species in Central Park. With its gray fur and bushy tail, it's easily recognizable. These squirrels are known for their acrobatic abilities, often seen leaping from tree to tree or balancing on slender branches. They have a varied diet, including nuts, seeds, fruits, and even bird eggs. Despite their name, they can exhibit a range of color variations, from silver-gray to reddish-brown. They are adaptable to urban environments and are active during the day."
     }
 ]
-
-module.exports = squirrels;
