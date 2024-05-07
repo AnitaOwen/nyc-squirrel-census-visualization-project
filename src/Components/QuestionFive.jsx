@@ -130,7 +130,7 @@ const QuestionFive = ({ answer,  setAnswer }) => {
           {calculatingApproachPercentage(data)}
           </li>
           </p>
-          <Link to={`/bonus`}>Next Question</Link>
+          <Link to={'/squirrel'}><button>Let's see who you found!</button></Link>
         </div>
       )}
     </div>
