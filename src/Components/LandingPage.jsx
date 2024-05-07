@@ -11,7 +11,7 @@ const LandingPage = () => {
           <h3 className="text-lg">Hi there! I'm Rosie, a squirrel scout. After a busy day selling cookies, my friends and I got chased by a big dog. Now I can't find them. Can you help me find my friends?</h3>
         </div>
       </div>
-      <Link to="/question1" className="block mt-4 text-center bg-green-500 py-2 px-4 rounded-lg text-white ">Let's go!</Link>
+      <Link to="/question1" className="block mt-4 text-center bg-green-500 py-2 px-4 rounded-lg text-white "><button>Let's Go!</button></Link>
       <div>
         <img src="https://res.cloudinary.com/djg5i10dg/image/upload/v1715041848/rosie.png" alt="Rosie the squirrel" className="mx-auto py-20 h-180 mt-20" />
       </div>
