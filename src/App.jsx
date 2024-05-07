@@ -48,8 +48,8 @@ const App = () => {
         <Route path="/question1" element={<QuestionOne answer={answer} setAnswer={setAnswer}/>} />
         <Route path="/question2" element={<QuestionTwo answer={answer} setAnswer={setAnswer} sightingsCount={sightings}/>} />
         <Route path="/question3" element={<QuestionThree answer={answer} setAnswer={setAnswer}/>} />
-        <Route path="/question4" element={<QuestionFour answer={answer} setAnswer={setAnswer}/>} />
-        <Route path="/question5" element={<QuestionFive answer={answer} setAnswer={setAnswer}/>} />
+        <Route path="/question4" element={<QuestionFour answer={answer} setAnswer={setAnswer} sightingsCount={sightings}/>} />
+        <Route path="/question5" element={<QuestionFive answer={answer} setAnswer={setAnswer} sightingsCount={sightings}/>} />
       </Routes>
     </>
   );
