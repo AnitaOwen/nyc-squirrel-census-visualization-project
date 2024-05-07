@@ -58,20 +58,22 @@ const BonusQuestion = () => {
               Excited
             </label>
           </div>
-          <button type="submit" className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded block mx-auto mb-6">Submit</button>
+          {/* <button type="submit" className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded block mx-auto mb-6">Submit</button> */}
         </form>
 
         {selectedOption === 'scared' && (
           <div className="text-center">
             <p>You selected: Scared</p>
             <p>Don't worry! Our squirrel friends help balance the ecosystem</p>
+            {/* <Link to="https://kids.nationalgeographic.com/animals/mammals/facts/eastern-gray-squirrel">Show me more</Link> */}
           </div>
         )}
 
         {selectedOption === 'curious' && (
           <div className="text-center">
             <p>You selected: Curious</p>
-            <p>Hey there, ranger! There's a lot more you can learn about squirrels if you click this link:</p>
+            <p>Hey there, ranger! There's a lot more you can learn about squirrels if you click this link</p>
+            {/* <Link to="https://kids.nationalgeographic.com/animals/mammals/facts/eastern-gray-squirrel">Show me more</Link> */}
           </div>
         )}
 
