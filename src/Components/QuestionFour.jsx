@@ -117,7 +117,7 @@ const QuestionFour = ({answer,  setAnswer, sightings }) => {
       )}
         {!toggleForm && (
         <div>
-          <p>These are some of the things my friends are doing: </p>
+          <p>While they were {answer.activity}, this is how many of my friends were also doing other activities! Who says we can't multi-task? </p>
           <ul>
             <li>Running: {activityCount.running}/{sightings.length}</li>
             <li>Playing tag: {activityCount.chasing}/{sightings.length}</li>
