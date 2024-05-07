@@ -2,17 +2,29 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 const API = import.meta.env.VITE_API_URL;
 
-const QuestionThree = ({ answer, setAnswer }) => {
+const QuestionThree = ({ answer, setAnswer, sightingsCount }) => {
   const [toggleForm, setToggleForm] = useState(true);
   const [data, setData] = useState([]);
+
+  const fetchAllPages = async () => {
+    try {
+      let allMatchingSounds = [];
+      for (let i = 0; i < 4; i++) {
+        const data = await fetch(
+          `${API}?${answer.sound}=true&$offset=${i * 1000}&$order=:id`
+        ).then((res) => res.json());
+        allMatchingSounds = allMatchingSounds.concat(data);
+      }
+      setData(allMatchingSounds);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   function handleSubmit(event) {
     event.preventDefault();
     setToggleForm(false);
-    fetch(`${API}?${answer.sound}=false`)
-      .then((res) => res.json())
-      .then((data) => setData(data))
-      .catch((error) => console.error(error));
+    fetchAllPages();
   }
 
   function handleChange(event) {
@@ -20,7 +32,7 @@ const QuestionThree = ({ answer, setAnswer }) => {
   }
 
   function findPercentage() {
-    return Math.ceil((data.length / 3023) * 100);
+    return Math.ceil((data.length / sightingsCount.length) * 100);
   }
   const percentage = findPercentage();
 
