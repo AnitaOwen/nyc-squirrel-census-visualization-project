@@ -1,0 +1,21 @@
+body {
+    background-image: url("https://res.cloudinary.com/djg5i10dg/image/upload/v1715040788/mike-benna-SBiVq9eWEtQ-unsplash_hvclsc.jpg");
+    background-size: cover;
+  }
+  
+  .speech-bubble {
+    position: relative;
+    padding: 15px;
+    border-radius: 20px;
+  }
+  
+  .speech-bubble::before {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: #4299e1 transparent transparent;
+  }

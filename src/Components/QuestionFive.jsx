@@ -20,6 +20,45 @@ const QuestionFive = ({ answer,  setAnswer }) => {
     .catch((error) => console.error(error))
   }
 
+  function calculatingRunsPercentage(data) {
+    let runsCount = 0;
+
+    for (const squirrel of data) {
+      if (squirrel.runs_from === true) {
+        runsCount++;
+      }
+    }
+
+    const runsPercentage = (runsCount / data.length) * 100;
+    return Math.floor(runsPercentage);
+  }
+
+  function calculatingForagePercentage(data) {
+    let forageCount = 0;
+
+    for (const squirrel of data) {
+      if (squirrel.foraging === true) {
+        forageCount++; 
+      }
+    }
+
+    const foragePercentage = (forageCount / data.length) * 100;
+    return Math.floor(foragePercentage);
+  }
+
+  function calculatingApproachPercentage(data) {
+    let approachCount = 0;
+
+    for (const squirrel of data) {
+      if (squirrel.approaches === true) {
+        approachCount++;
+      }
+    }
+
+    const approachPercentage = (approachCount / data.length) * 100;
+    return Math.floor(approachPercentage);
+  }
+
   useEffect(() => {
     console.log(data); // This will log whenever data changes
   }, [data])
@@ -70,7 +109,13 @@ const QuestionFive = ({ answer,  setAnswer }) => {
       )}
       {!toggleForm && (
         <div>
-          <p>Some calculations</p>
+          <p>
+          <li>
+          {calculatingRunsPercentage(data)}
+          {calculatingForagePercentage(data)}
+          {calculatingApproachPercentage(data)}
+          </li>
+          </p>
           <Link to={`/bonus`}>Next Question</Link>
         </div>
       )}
