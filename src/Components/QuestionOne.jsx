@@ -91,7 +91,7 @@ const QuestionOne = ({ answer, setAnswer, sightings }) => {
         {!toggleForm && (
           <div>
             <p className="text-lg">
-              {percentage}% of people who reported seeing a squirrel with this
+              {percentage}% of people reported seeing a squirrel with this
               color fur in Central Park!
             </p>
             <Link to={`/question2`} className="block mx-auto mt-6">
