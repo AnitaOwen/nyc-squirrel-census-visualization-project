@@ -37,7 +37,7 @@ const QuestionOne = ({answer,  setAnswer }) => {
             id="black"
             name="color"
             value="black"
-            // onChange={handleChange}
+            onChange={handleChange}
             required
             />
             Black
@@ -48,7 +48,7 @@ const QuestionOne = ({answer,  setAnswer }) => {
             id="cinnamon"
             name="color"
             value="cinnamon"
-            // onChange={handleChange}
+            onChange={handleChange}
             />
             Cinnamon
           </label>
@@ -58,7 +58,7 @@ const QuestionOne = ({answer,  setAnswer }) => {
             id="gray"
             name="color"
             value="gray"
-            // onChange={handleChange}
+            onChange={handleChange}
             />
             Gray
           </label>
