@@ -16,7 +16,7 @@ const QuestionTwo = ({answer,  setAnswer, sightingsCount }) => {
       for (let i = 0; i < 4; i++) { 
         const data = await fetch(`${API}?location=${answer.location}&$offset=${i * 1000}&$order=:id`)
           .then((res) => res.json());
-          console.log(data)
+          // console.log(data)
           allMatchingLocations = allMatchingLocations.concat(data)
       }
       setData(allMatchingLocations);
@@ -29,10 +29,6 @@ const QuestionTwo = ({answer,  setAnswer, sightingsCount }) => {
     event.preventDefault()
     setToggleForm(false)
     fetchAllPages()
-    // fetch(`${API}?location=${answer.location}`)
-    // .then((res) => res.json())
-    // .then((data) => setData(data))
-    // .catch((error) => console.error(error))
   }
   
   // console.log(sightingsCount.length)
@@ -77,7 +73,7 @@ const QuestionTwo = ({answer,  setAnswer, sightingsCount }) => {
       )}
       {!toggleForm && (
         <div>
-          <p>{percentage}% of people who reported seeing a squirrel also saw them in this place!</p>
+          <p>{percentage}% of people who reported seeing a squirrel in Central Park also saw them in this place!</p>
           <Link to={`/question3`}>
             <button>Next Question</button>
           </Link>
