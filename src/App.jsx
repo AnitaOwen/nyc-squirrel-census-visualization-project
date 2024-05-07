@@ -19,16 +19,17 @@ const App = () => {
     sound: "",
     activity: "",
     feeling: "",
-  })
+  });
 
   const fetchAllPages = async () => {
     try {
       let allSightings = [];
-      for (let i = 0; i < 4; i++) { 
-        const data = await fetch(`${API}?$offset=${i * 1000}&$order=:id`)
-          .then((res) => res.json());
-          // console.log(data)
-          allSightings = allSightings.concat(data)
+      for (let i = 0; i < 4; i++) {
+        const data = await fetch(`${API}?$offset=${i * 1000}&$order=:id`).then(
+          (res) => res.json()
+        );
+        // console.log(data)
+        allSightings = allSightings.concat(data);
       }
       setSightings(allSightings);
     } catch (error) {
@@ -45,11 +46,56 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/question1" element={<QuestionOne answer={answer} setAnswer={setAnswer}/>} />
-        <Route path="/question2" element={<QuestionTwo answer={answer} setAnswer={setAnswer} sightingsCount={sightings}/>} />
-        <Route path="/question3" element={<QuestionThree answer={answer} setAnswer={setAnswer}/>} />
-        <Route path="/question4" element={<QuestionFour answer={answer} setAnswer={setAnswer} sightingsCount={sightings}/>} />
-        <Route path="/question5" element={<QuestionFive answer={answer} setAnswer={setAnswer} sightingsCount={sightings}/>} />
+        <Route
+          path="/question1"
+          element={
+            <QuestionOne
+              answer={answer}
+              setAnswer={setAnswer}
+              sightings={sightings}
+            />
+          }
+        />
+        <Route
+          path="/question2"
+          element={
+            <QuestionTwo
+              answer={answer}
+              setAnswer={setAnswer}
+              sightings={sightings}
+            />
+          }
+        />
+        <Route
+          path="/question3"
+          element={
+            <QuestionThree
+              answer={answer}
+              setAnswer={setAnswer}
+              sightings={sightings}
+            />
+          }
+        />
+        <Route
+          path="/question4"
+          element={
+            <QuestionFour
+              answer={answer}
+              setAnswer={setAnswer}
+              sightings={sightings}
+            />
+          }
+        />
+        <Route
+          path="/question5"
+          element={
+            <QuestionFive
+              answer={answer}
+              setAnswer={setAnswer}
+              sightings={sightings}
+            />
+          }
+        />
       </Routes>
     </>
   );
