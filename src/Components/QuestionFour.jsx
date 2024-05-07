@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 const API = import.meta.env.VITE_API_URL;
 
 const QuestionFour = ({answer,  setAnswer }) => {
-  const [activity, setActivity] = useState("")
-  const [toggleForm, setToggleForm] = useState(true);
+  const [toggleForm, setToggleForm] = useState(true)
   const [data, setData] = useState([])
+  const [activityCount, setActivityCount] = useState({})
 
   // const activityEndpoints = {
   //   running: `${API}?running=true`,
@@ -13,23 +13,46 @@ const QuestionFour = ({answer,  setAnswer }) => {
   //   foraging: `${API}?foraging=true`,
   //   eating: `${API}?eating=true`,
   //   indifferent: `${API}?indifferent=true`,
-  // };
+  // }
 
   // const apiUrl = activityEndpoints[activity]
 
   function handleSubmit(event){
     event.preventDefault()
     setToggleForm(false)
-    fetch(`${API}?${activity}=true`)
+    fetch(`${API}?${answer.activity}=true`)
       .then((res) => res.json())
-      .then((data) => setData(data))
+      .then((data) => {
+        setData(data)
+        calculateActivityCount(data)
+      })
       .catch((error) => console.error(error))
   }
 
   function handleChange(event) {
-    setActivity(event.target.value)
     setAnswer({ ...answer, [event.target.name]: event.target.value })
   }
+
+  function calculateActivityCount(data) {
+    const count = {
+      running: 0,
+      chasing: 0,
+      foraging: 0,
+      eating: 0,
+      indifferent: 0,
+    }
+
+    data.forEach((squirrel) => {
+      if (squirrel.running) count.running++
+      if (squirrel.chasing) count.chasing++
+      if (squirrel.foraging) count.foraging++
+      if (squirrel.eating) count.eating++
+      if (squirrel.indifferent) count.indifferent++
+    })
+
+    setActivityCount(count)
+  }
+
 
   useEffect(() => {
     console.log(data); // This will log whenever data changes
@@ -42,7 +65,7 @@ const QuestionFour = ({answer,  setAnswer }) => {
         <p>Some of my friends like to look for things to eat or hide or will make friends around the park. When you saw my friend, what were they doing?</p>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="running">
+            <label htmlFor="activity">
               <input 
                 type="radio" 
                 id="running"
@@ -53,7 +76,7 @@ const QuestionFour = ({answer,  setAnswer }) => {
               />
               Running
             </label>
-            <label htmlFor="tag">
+            <label htmlFor="activity">
               <input 
                 type="radio" 
                 id="chasing"
@@ -63,7 +86,7 @@ const QuestionFour = ({answer,  setAnswer }) => {
               />
               Playing tag
             </label>
-            <label htmlFor="food">
+            <label htmlFor="activity">
               <input 
                 type="radio" 
                 id="foraging"
@@ -73,7 +96,7 @@ const QuestionFour = ({answer,  setAnswer }) => {
               />
               Looking for food
             </label>
-            <label htmlFor="food">
+            <label htmlFor="activity">
               <input 
                 type="radio" 
                 id="eating"
@@ -83,7 +106,7 @@ const QuestionFour = ({answer,  setAnswer }) => {
               />
               Eating
             </label>
-            <label htmlFor="watching">
+            <label htmlFor="activity">
               <input 
                 type="radio" 
                 id="indifferent"
@@ -100,14 +123,21 @@ const QuestionFour = ({answer,  setAnswer }) => {
       )}
         {!toggleForm && (
         <div>
-          <p>Some calculations</p>
+          <p>These are some of the things my friends are doing: </p>
+          <ul>
+            <li>Running: {activityCount.running}/{data.length}</li>
+            <li>Playing tag: {activityCount.chasing}/{data.length}</li>
+            <li>Looking for food: {activityCount.foraging}/{data.length}</li>
+            <li>Eating: {activityCount.eating}/{data.length}</li>
+            <li>Doing nothing: {activityCount.indifferent}/{data.length}</li>
+          </ul>
           <Link to={`/question5`}>
             <button>Next Question</button>
           </Link>
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
 export default QuestionFour;
