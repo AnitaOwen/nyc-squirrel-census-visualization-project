@@ -140,9 +140,9 @@ const QuestionFive = ({ answer, setAnswer, sightings }) => {
             <p className="text-lg">{runsPercentage}% of squirrels in Central Park were found hiding away from humans.</p>
             <p className="text-lg">{foragePercentage}% of squirrels in Central Park were found foraging for food!</p>
             <p className="text-lg">{approachesPercentage}% of squirrels in Central Park were not afraid to say hi to other people.</p>
-            <Link to={`/bonus`} className="block mx-auto mt-6">
-              <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded inline-flex items-center">
-                <span className="text-lg">Next Question</span>
+            <Link to={`/squirrel`} className="block mx-auto mt-6">
+              <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded inline-flex items-center">
+                <span className="text-lg">Find my friend!</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6 ml-2">
                   <path fillRule="evenodd" d="M19.707 9.293l-7-7a1 1 0 0 0-1.414 1.414L16.586 9H3a1 1 0 0 0 0 2h13.586l-5.293 5.293a1 1 0 1 0 1.414 1.414l7-7a1 1 0 0 0 0-1.414z" clipRule="evenodd" />
                 </svg>
