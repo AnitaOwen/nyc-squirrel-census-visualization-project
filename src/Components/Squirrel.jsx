@@ -1,17 +1,23 @@
-import React from 'react'
+import { Link } from "react-router-dom";
 
 const Squirrel = ({ squirrels, answer }) => {
-    console.log("ANSWER", answer)
-    console.log("SQUIRRELS", squirrels)
+
     const result = squirrels.filter(squirrel => squirrel.resultColor === answer.color)[0]
   return (
     <div>
         {result && (
             <>
-            <h4>You found {result.species}</h4>
+            <img src={result.img} alt={result.persona} />
+            <h2>You found {result.persona}!</h2>
+            <p><span>Personality: </span>{result.personality}</p>
+            <p><span>Background: </span>{result.background}</p>
+            <p><span>Goals: </span>{result.goals}</p>
+            <p><span>Species: </span>{result.species}</p>
             <p>{result.description}</p>
             </>
         )}
+        <Link to={"/bonus"}><button>Bonus Question</button></Link>
+        <Link to={"/"}><button>Play Again</button></Link>
     </div>
   )
 }
