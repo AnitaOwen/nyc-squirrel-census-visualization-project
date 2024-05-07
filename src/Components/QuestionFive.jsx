@@ -2,24 +2,61 @@ import React, { useState, useEffect  } from 'react';
 import { Link } from "react-router-dom";
 const API = import.meta.env.VITE_API_URL;
 
-const QuestionFive = ({ answer,  setAnswer }) => {
+const QuestionFive = ({ answer,  setAnswer, sightings }) => {
   const [toggleForm, setToggleForm] = useState(true);
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
+
+
+  const [runs, setRuns] = useState([]);
+  const [forage, setForage] = useState([]);
+  const [approaches, setApproaches] = useState([]);
 
   const handleChange = (event) => {
     setAnswer({ ...answer, [event.target.name]: event.target.value });
   }
 
-  const fetchAllPages = async () => {
+  // Runs_from function
+  const fetchAllRuns = async () => {
     try {
-      let allMatchingLocations = [];
+      let allRuns = [];
       for (let i = 0; i < 4; i++) { 
-        const data = await fetch(`${API}?location=${answer.location}&$offset=${i * 1000}&$order=:id`)
+        const data = await fetch(`${API}?runs_from=true&$offset=${i * 1000}&$order=:id`)
+          .then((res) => res.json());
+          allRuns = allRuns.concat(data)
+      }
+      setRuns(allRuns);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  // Foraging function
+  const fetchAllForaging = async () => {
+    try {
+      let allForaging = [];
+      for (let i = 0; i < 4; i++) { 
+        const data = await fetch(`${API}?foraging=true&$offset=${i * 1000}&$order=:id`)
           .then((res) => res.json());
           console.log(data)
-          allMatchingLocations = allMatchingLocations.concat(data)
+          allForaging= allForaging.concat(data)
       }
-      setData(allMatchingLocations);
+      setForage(allForaging);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  // Approaches function
+  const fetchAllApproaches = async () => {
+    try {
+      let allApproaches = [];
+      for (let i = 0; i < 4; i++) { 
+        const data = await fetch(`${API}?approaches=true&$offset=${i * 1000}&$order=:id`)
+          .then((res) => res.json());
+          console.log(data)
+          allApproaches= allApproaches.concat(data)
+      }
+      setApproaches(allApproaches);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -28,50 +65,32 @@ const QuestionFive = ({ answer,  setAnswer }) => {
   function handleSubmit(event){
     event.preventDefault()
     setToggleForm(false);
-    fetch(`${API}?${answer.social}=true`)
-    .then((res) => res.json())
-    .then((data) => setData(data))
-    .catch((error) => console.error(error))
+  
+    fetchAllRuns();
+    fetchAllForaging();
+    fetchAllApproaches();
   }
 
-  function calculatingRunsPercentage(data) {
-    let runsCount = 0;
+  function calculatingRunsPercentage() {
+    // console.log("runs", runs.length)
+    return Math.floor((runs.length / sightings.length) * 100);
+  }
+  const runsPercentage = calculatingRunsPercentage();
 
-    for (const squirrel of data) {
-      if (squirrel.runs_from === true) {
-        runsCount++;
-      }
+
+
+  function calculatingForagePercentage() {
+    // console.log("forage", forage.length )
+    return Math.floor((forage.length / sightings.length) * 100);
     }
+  const foragePercentage = calculatingForagePercentage();
 
-    const runsPercentage = (runsCount / data.length) * 100;
-    return Math.floor(runsPercentage);
-  }
 
-  function calculatingForagePercentage(data) {
-    let forageCount = 0;
-
-    for (const squirrel of data) {
-      if (squirrel.foraging === true) {
-        forageCount++; 
-      }
+  function calculatingApproachesPercentage() {
+    return Math.floor((approaches.length / sightings.length) * 100);
     }
+    const approachesPercentage = calculatingApproachesPercentage();
 
-    const foragePercentage = (forageCount / data.length) * 100;
-    return Math.floor(foragePercentage);
-  }
-
-  function calculatingApproachPercentage(data) {
-    let approachCount = 0;
-
-    for (const squirrel of data) {
-      if (squirrel.approaches === true) {
-        approachCount++;
-      }
-    }
-
-    const approachPercentage = (approachCount / data.length) * 100;
-    return Math.floor(approachPercentage);
-  }
 
   useEffect(() => {
     console.log(data); // This will log whenever data changes
@@ -116,7 +135,7 @@ const QuestionFive = ({ answer,  setAnswer }) => {
                 />
                 saying hi to human friends 
               </label>
-              <button type='submit'>Submit</button>
+              <button type='submit' className= "bg-green-400">Submit</button>
             </div>
           </form>
         </div>
@@ -124,13 +143,15 @@ const QuestionFive = ({ answer,  setAnswer }) => {
       {!toggleForm && (
         <div>
           <p>
-          <li>
-          {calculatingRunsPercentage(data)}
-          {calculatingForagePercentage(data)}
-          {calculatingApproachPercentage(data)}
-          </li>
+            {runsPercentage}% of squirrels in Central Park were found hiding away from humans.
           </p>
-          <Link to={`/bonus`}>Next Question</Link>
+          <p>
+            {foragePercentage}% of squirrels in Central Park were found foraging for food! 
+          </p>
+          <p>
+            {approachesPercentage}% of squirrels in Central Park were brave enough to say hi to other people.
+          </p>
+          <Link to={`/bonus`}><button className="bg-red-400 ">Next Question</button></Link>
         </div>
       )}
     </div>
