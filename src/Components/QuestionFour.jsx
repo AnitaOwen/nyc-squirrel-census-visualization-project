@@ -2,31 +2,30 @@ import { useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 const API = import.meta.env.VITE_API_URL;
 
-const QuestionFour = ({answer,  setAnswer }) => {
+const QuestionFour = ({answer,  setAnswer, sightingsCount }) => {
   const [toggleForm, setToggleForm] = useState(true)
   const [data, setData] = useState([])
   const [activityCount, setActivityCount] = useState({})
 
-  // const activityEndpoints = {
-  //   running: `${API}?running=true`,
-  //   chasing: `${API}?chasing=true`,
-  //   foraging: `${API}?foraging=true`,
-  //   eating: `${API}?eating=true`,
-  //   indifferent: `${API}?indifferent=true`,
-  // }
-
-  // const apiUrl = activityEndpoints[activity]
-
+  const fetchAllPages = async () => {
+    try {
+      let allMatchingActivities = [];
+      for (let i = 0; i < 4; i++) { 
+        const data = await fetch(`${API}?${answer.activity}=true&$offset=${i * 1000}&$order=:id`)
+          .then((res) => res.json());
+        allMatchingActivities = allMatchingActivities.concat(data);
+      }
+      calculateActivityCount(allMatchingActivities)
+      setData(allMatchingActivities)
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+  
   function handleSubmit(event){
-    event.preventDefault()
-    setToggleForm(false)
-    fetch(`${API}?${answer.activity}=true`)
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        calculateActivityCount(data)
-      })
-      .catch((error) => console.error(error))
+    event.preventDefault();
+    setToggleForm(false);
+    fetchAllPages();
   }
 
   function handleChange(event) {
@@ -125,11 +124,11 @@ const QuestionFour = ({answer,  setAnswer }) => {
         <div>
           <p>These are some of the things my friends are doing: </p>
           <ul>
-            <li>Running: {activityCount.running}/{data.length}</li>
-            <li>Playing tag: {activityCount.chasing}/{data.length}</li>
-            <li>Looking for food: {activityCount.foraging}/{data.length}</li>
-            <li>Eating: {activityCount.eating}/{data.length}</li>
-            <li>Doing nothing: {activityCount.indifferent}/{data.length}</li>
+            <li>Running: {activityCount.running}/{sightingsCount.length}</li>
+            <li>Playing tag: {activityCount.chasing}/{sightingsCount.length}</li>
+            <li>Looking for food: {activityCount.foraging}/{sightingsCount.length}</li>
+            <li>Eating: {activityCount.eating}/{sightingsCount.length}</li>
+            <li>Doing nothing: {activityCount.indifferent}/{sightingsCount.length}</li>
           </ul>
           <Link to={`/question5`}>
             <button>Next Question</button>
