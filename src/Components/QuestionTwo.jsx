@@ -9,17 +9,33 @@ const QuestionTwo = ({answer,  setAnswer, sightingsCount }) => {
   const handleChange = (event) => {
     setAnswer({ ...answer, [event.target.name]: event.target.value });
   }
+
+  const fetchAllPages = async () => {
+    try {
+      let allMatchingLocations = [];
+      for (let i = 0; i < 4; i++) { 
+        const data = await fetch(`${API}?location=${answer.location}&$offset=${i * 1000}&$order=:id`)
+          .then((res) => res.json());
+          console.log(data)
+          allMatchingLocations = allMatchingLocations.concat(data)
+      }
+      setData(allMatchingLocations);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   
   function handleSubmit(event){
     event.preventDefault()
-    setToggleForm(false);
-    fetch(`${API}?location=${answer.location}`)
-    .then((res) => res.json())
-    .then((data) => setData(data))
-    .catch((error) => console.error(error))
+    setToggleForm(false)
+    fetchAllPages()
+    // fetch(`${API}?location=${answer.location}`)
+    // .then((res) => res.json())
+    // .then((data) => setData(data))
+    // .catch((error) => console.error(error))
   }
   
-  console.log(sightingsCount.length)
+  // console.log(sightingsCount.length)
   // average # number of times the same color was seen in this park
   function findPercentage(){
     return Math.ceil((data.length / sightingsCount.length) * 100)
