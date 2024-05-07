@@ -1,6 +1,11 @@
+import { Link } from "react-router-dom";
+
 const NavBar = () => {
   return (
-    <div>NavBar</div>
+    <div>
+        <Link to={"/"}><h1>Squirrel Scout NYC</h1></Link>
+        
+    </div>
   )
 }
 
