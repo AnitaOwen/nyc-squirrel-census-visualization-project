@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const BonusQuestion = () => {
   const [selectedOption, setSelectedOption] = useState(null);
