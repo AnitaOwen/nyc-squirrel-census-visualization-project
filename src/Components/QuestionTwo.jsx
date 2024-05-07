@@ -19,16 +19,12 @@ const QuestionTwo = ({answer,  setAnswer, sightingsCount }) => {
     .catch((error) => console.error(error))
   }
   
-  // console.log(sightingsCount.length)
+  console.log(sightingsCount.length)
   // average # number of times the same color was seen in this park
   function findPercentage(){
-    return Math.ceil((data.length / 3023) * 100)
+    return Math.ceil((data.length / sightingsCount.length) * 100)
   }
   const percentage = findPercentage()
-
-  useEffect(() => {
-    console.log(data); // This will log whenever data changes
-  }, [data])
 
   return (
     <div>
