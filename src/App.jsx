@@ -8,6 +8,8 @@ import QuestionThree from "./Components/QuestionThree";
 import QuestionFour from "./Components/QuestionFour";
 import QuestionFive from "./Components/QuestionFive";
 import NavBar from "./Components/NavBar";
+import Squirrel from "./Components/Squirrel";
+import { squirrels } from "../squirrelData";
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -50,6 +52,7 @@ const App = () => {
         <Route path="/question3" element={<QuestionThree answer={answer} setAnswer={setAnswer} sightings={sightings}/>} />
         <Route path="/question4" element={<QuestionFour answer={answer} setAnswer={setAnswer} sightings={sightings}/>} />
         <Route path="/question5" element={<QuestionFive answer={answer} setAnswer={setAnswer} sightings={sightings}/>} />
+
       </Routes>
     </>
   );
