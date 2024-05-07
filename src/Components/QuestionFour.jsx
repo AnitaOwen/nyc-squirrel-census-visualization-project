@@ -2,7 +2,7 @@ import { useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 const API = import.meta.env.VITE_API_URL;
 
-const QuestionFour = ({answer,  setAnswer, sightingsCount }) => {
+const QuestionFour = ({answer,  setAnswer, sightings }) => {
   const [toggleForm, setToggleForm] = useState(true)
   const [data, setData] = useState([])
   const [activityCount, setActivityCount] = useState({})
@@ -51,11 +51,6 @@ const QuestionFour = ({answer,  setAnswer, sightingsCount }) => {
 
     setActivityCount(count)
   }
-
-
-  useEffect(() => {
-    console.log(data); // This will log whenever data changes
-  }, [data])
 
   return (
     <div>
@@ -124,11 +119,11 @@ const QuestionFour = ({answer,  setAnswer, sightingsCount }) => {
         <div>
           <p>These are some of the things my friends are doing: </p>
           <ul>
-            <li>Running: {activityCount.running}/{sightingsCount.length}</li>
-            <li>Playing tag: {activityCount.chasing}/{sightingsCount.length}</li>
-            <li>Looking for food: {activityCount.foraging}/{sightingsCount.length}</li>
-            <li>Eating: {activityCount.eating}/{sightingsCount.length}</li>
-            <li>Doing nothing: {activityCount.indifferent}/{sightingsCount.length}</li>
+            <li>Running: {activityCount.running}/{sightings.length}</li>
+            <li>Playing tag: {activityCount.chasing}/{sightings.length}</li>
+            <li>Looking for food: {activityCount.foraging}/{sightings.length}</li>
+            <li>Eating: {activityCount.eating}/{sightings.length}</li>
+            <li>Doing nothing: {activityCount.indifferent}/{sightings.length}</li>
           </ul>
           <Link to={`/question5`}>
             <button>Next Question</button>

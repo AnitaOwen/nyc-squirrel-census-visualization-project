@@ -2,9 +2,9 @@ import React, { useState, useEffect  } from 'react';
 import { Link } from "react-router-dom";
 const API = import.meta.env.VITE_API_URL;
 
-const QuestionTwo = ({answer,  setAnswer, sightingsCount }) => {
+const QuestionTwo = ({answer,  setAnswer, sightings }) => {
   const [toggleForm, setToggleForm] = useState(true);
-  const [data, setData] = useState([])
+  const [locationData, setLocationData] = useState([])
 
   const handleChange = (event) => {
     setAnswer({ ...answer, [event.target.name]: event.target.value });
@@ -16,10 +16,9 @@ const QuestionTwo = ({answer,  setAnswer, sightingsCount }) => {
       for (let i = 0; i < 4; i++) { 
         const data = await fetch(`${API}?location=${answer.location}&$offset=${i * 1000}&$order=:id`)
           .then((res) => res.json());
-          // console.log(data)
           allMatchingLocations = allMatchingLocations.concat(data)
       }
-      setData(allMatchingLocations);
+      setLocationData(allMatchingLocations);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -31,10 +30,8 @@ const QuestionTwo = ({answer,  setAnswer, sightingsCount }) => {
     fetchAllPages()
   }
   
-  // console.log(sightingsCount.length)
-  // average # number of times the same color was seen in this park
   function findPercentage(){
-    return Math.ceil((data.length / sightingsCount.length) * 100)
+    return Math.ceil((locationData.length / sightings.length) * 100)
   }
   const percentage = findPercentage()
 
@@ -73,7 +70,7 @@ const QuestionTwo = ({answer,  setAnswer, sightingsCount }) => {
       )}
       {!toggleForm && (
         <div>
-          <p>{percentage}% of people who reported seeing a squirrel in Central Park also saw them in this place!</p>
+          <p>{percentage}% of people who reported seeing a squirrel in Central also saw them in this place!</p>
           <Link to={`/question3`}>
             <button>Next Question</button>
           </Link>
