@@ -2,26 +2,44 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 const API = import.meta.env.VITE_API_URL;
 
-const QuestionThree = ({ answer, setAnswer }) => {
+const QuestionThree = ({ answer, setAnswer, sightings }) => {
   const [toggleForm, setToggleForm] = useState(true);
   const [data, setData] = useState([]);
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    setToggleForm(false);
-    fetch(`${API}?${answer.sound}=false`)
-      .then((res) => res.json())
-      .then((data) => setData(data))
-      .catch((error) => console.error(error));
-  }
 
   function handleChange(event) {
     setAnswer({ ...answer, [event.target.name]: event.target.value });
   }
 
-  // useEffect(() => {
-  //   console.log(data); // This will log whenever data changes
-  // }, [data]);
+  // all pages fetch
+  const fetchAllPages = async () => {
+    try {
+      let allMatchingSounds = [];
+      for (let i = 0; i < 4; i++) {
+        const data = await fetch(
+          `${API}?${answer.sound}=true&$offset=${i * 1000}&$order=:id`
+        ).then((res) => res.json());
+        allMatchingSounds = allMatchingSounds.concat(data);
+      }
+      setData(allMatchingSounds);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    setToggleForm(false);
+    fetchAllPages();
+  }
+
+  function findPercentage() {
+    return Math.ceil((data.length / sightings.length) * 100);
+  }
+  const percentage = findPercentage();
+
+  useEffect(() => {
+    console.log(data); // This will log whenever data changes
+  }, [data]);
 
   return (
     <div>
@@ -77,7 +95,10 @@ const QuestionThree = ({ answer, setAnswer }) => {
       )}
       {!toggleForm && (
         <div>
-          <p>CALCULATIONS</p>
+          <p>
+            {percentage}% of people who reported seeing a squirrel also heard a
+            squirrel making the same noises!
+          </p>
           <Link to={`/question4`}>
             <button>Next Question</button>
           </Link>
